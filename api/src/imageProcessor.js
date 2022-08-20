@@ -37,7 +37,7 @@ function imageProcessor(filename) {
 
           resizeWorker.on('message', (message) => {
             resizeWorkerFinished = true;
-            resolve('monochromeWorker finished processing')
+            resolve('resizeWorker finished processing')
           });
 
           resizeWorker.on('error', (error) => {
@@ -52,7 +52,7 @@ function imageProcessor(filename) {
 
           monochromeWorker.on('message', (message) => {
             monochromeWorkerFinished = true;
-            resolve('resizeWorker finished processing')
+            resolve('monochromeWorker finished processing')
           });
 
           monochromeWorker.on('error', (error) => {

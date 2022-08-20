@@ -238,7 +238,7 @@ describe('module 4', () => {
 
       const imageProcessor = rewire('../../api/src/imageProcessor');
       imageProcessor.__set__('pathToResizeWorker', path.resolve('./test/module-4/resizeWorkerProxy.js'));
-      imageProcessor.__set__('pathToMonochromeWorker', path.resolve('./test/module-4/monochromeFast.js'));
+      imageProcessor.__set__('pathToResizeWorker', path.resolve('./test/module-4/resizeFast.js'));
 
       try {
         result = await imageProcessor('ullr.png');
@@ -306,8 +306,8 @@ describe('module 4', () => {
 
     it('should resolve the promise on monochromeWorker\'s \'message\' event @monochrome-message-event', async () => {
       const imageProcessor = rewire('../../api/src/imageProcessor');
-      imageProcessor.__set__('pathToMonochromeWorker', path.resolve('./test/module-4/resizeWorkerProxy.js'));
-      imageProcessor.__set__('pathToResizeWorker', path.resolve('./test/module-4/monochromeFast.js'));
+      imageProcessor.__set__('pathToResizeWorker', path.resolve('./test/module-4/resizeWorkerProxy.js'));
+      imageProcessor.__set__('pathToMonochromeWorker', path.resolve('./test/module-4/monochromeFast.js'));
 
       try {
         result = await imageProcessor('ullr.png');
@@ -377,12 +377,13 @@ describe('module 4', () => {
   context('router.js', async () => {
     const directory = path.resolve(__dirname + '../../../api/uploads');
 
+
     it('should add a call to imageProcessor passing in the image in our post request @invoke-the-image-processor', async () => {
       let files = fs.readdirSync(directory);
 
-      for (const file of files) {
-        fs.unlinkSync(directory +'/' + file);
-      }
+      // for (const file of files) {
+      //   fs.unlinkSync(directory +'/' + file);
+      // }
 
 
       await request(app)
